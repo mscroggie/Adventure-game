@@ -1,10 +1,9 @@
 package tests;
 import adventure_game.Character;
 import adventure_game.Player;
-import adventure_game.HealingPotion;
+import adventure_game.items.HealingPotion;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -21,7 +20,7 @@ public class HealingPotionTests {
     @Test
     void testHealingPotion(){
         assertTrue(c.getHealth() == 50 );
-        c.consume(healingPotion());
+        c.consume(HealingPotion());
         assertTrue(c.getHealth() <= 100 );
     }
 }

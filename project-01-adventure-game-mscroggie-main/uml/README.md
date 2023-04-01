@@ -1,1 +1,1 @@
-Add your UML diagrams to this directory.
+Game.pdf should be the uml diagram

@@ -1,7 +1,8 @@
 package tests;
-
+import adventure_game.items.HealingPotion;
 import adventure_game.Character;
 import adventure_game.Player;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -38,27 +39,42 @@ public class CharacterTests{
     }
     @Test
     void testSetAsVulnerable(){
-        assertFalse(c.isVulnerable);
+        assertFalse(c.isVulnerable());
         c.setAsVulnerable(1);
-        assertTrue(c.isVulnerable);
+        assertTrue(c.isVulnerable());
     }
     @Test
     void testSetAsStunned(){
-        assertFalse(c.isStunned);
+        assertFalse(c.isStunned());
         c.setAsStunned(1);
-        assertTrue(c.isStunned);
+        assertTrue(c.isStunned());
     }
     @Test
     void testObtain(){
         assertFalse(c.hasItems());
-        c.obtain(item);
+        c.obtain(HealingPotion());
         assertTrue(c.hasItems());
 
     }
-    @Test testUseItem(){
-        assertTrue(c.hasItems());
-        c.useItem();
-        assertFalse(c.hasItems)();
-    }
+    @Test 
+    void testDecreaseTurnsInvincible(){
+        assertFalse(c.isInvincible());
+       c.setAsInvincible(1);
+       c.decreaseTurnsInvincible();
+       assertFalse(c.isInvincible());
 
+    }
+    @Test
+    void testDecreaseTurnsVulnerable(){
+        assertFalse(c.isVulnerable());
+        c.setAsVulnerable(1);
+        c.decreaseTurnsVulnerable();
+        assertFalse(c.isVulnerable());
+    }
+    @Test void testDecreaseTurnsStunned(){
+        assertFalse(c.isStunned());
+        c.setAsStunned(1);
+        c.decreaseTurnsStunned();
+        assertFalse(c.isStunned());
+    }
 }

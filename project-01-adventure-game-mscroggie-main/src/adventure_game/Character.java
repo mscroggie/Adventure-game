@@ -28,6 +28,8 @@ abstract public class Character{
 
     private String name;
 
+    private String weakness;
+
     private ArrayList<Consumable> items;
 
     // Character Conditions:
@@ -55,10 +57,10 @@ abstract public class Character{
     public String toString(){
         String output;
         output = "";
-        output += "Name " + getName() + "\n";
-        output += "hp " + getHealth() + "\n";
-        output += "mana " + getMana() + "\n";
-        output += "damage " + getBaseDamage() + "\n";
+        output += "Name: " + getName() + "\n";
+        output += "hp: " + getHealth() + "\n";
+        output += "mana: " + getMana() + "\n";
+        output += "damage: " + getBaseDamage() + "\n";
         return output;
     }
 
@@ -152,8 +154,51 @@ abstract public class Character{
             this.setAsVulnerable(1);
         }
     }
+    public void castSpell(Character other){
+        String element = "none";
+        System.out.print("What spell will you cast?\n");
+        System.out.print("  1: Fire\n");
+        System.out.print("  2: Water\n");
+        System.out.print("  3: Electric\n");
+        System.out.print("  4: Ice\n");
+        int choice = Game.in.nextInt();
+       
+        
+        switch(choice){
+            case 1:
+                System.out.print("You cast a fire spell\n");
+                 element = "Fire";
+                 break;
+            case 2:
+                System.out.print("You cast a water spell\n");
+                 element = "Water";
+                 break;
+            case 3:
+                System.out.print("You cast an electric spell\n");
+                 element = "Electric";
+                 break;
+            case 4:
+                System.out.print("You cast an ice spell\n");
+                 element = "Ice";
+                 break;
+        }
+
+        if (element == other.weakness){
+            System.out.printf("%S is weak to %s\n", other.getName(), element);
+            other.setAsVulnerable(3);
+            tempDamageBuff = 3.0;
+            
+        }
+        this.attack(other);
+        this.mana -= 3;
+         
+    }
+
+
+
+
     /**
-     *used to both heal and damage character 
+     *used to both heal and damage character \n
      * can only be between 0 and max
      * @param modifier how much the health is increased or decreased
     */
@@ -166,8 +211,30 @@ abstract public class Character{
             this.health = this.getMaxHealth();
         }
     }
-
+    /**
+     * Increases or decreases a character's mana
+     */
+    public void modifyMana(int modifier){
+        this.mana+=modifier;
+        if (this.mana <0){
+            this.mana = 0;
+        }
+        if (this.mana > this.getMaxMana()){
+            this.mana = this.getMaxMana();
+        }
+    }
+    /**
+     * Sets an elemental weakness that takes more damagw
+     * @param element
+     */
     /* CONDITIONS */
+    public void setWeakness(String element){
+        this.weakness = element;
+    }
+    public boolean isWeakTo(String element){
+        return element == this.weakness;
+         
+    }
     /** sets character as vulnerable for a number of turns
      * @param numTurns the number of turns the character is vulnerable
      * if vulnerable the character will take more damage when attacked

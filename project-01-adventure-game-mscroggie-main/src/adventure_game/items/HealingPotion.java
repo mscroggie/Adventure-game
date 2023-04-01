@@ -4,8 +4,8 @@ import adventure_game.Character;
 import adventure_game.Game;
 
 
-/** implements Consumable
-*replensihes health points to Character with a chance of up to full health
+/** implements Consumable. 
+*Replenishes health points to Character with a chance of up to full health and
  * prints out how much health you have now
  */
 public class HealingPotion implements Consumable {
